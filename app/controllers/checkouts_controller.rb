@@ -11,7 +11,7 @@ class CheckoutsController < ApplicationController
   end
 
   def show
-
+    @transaction = gateway.transaction.find(params[:id])
   end
 
 
@@ -53,7 +53,7 @@ class CheckoutsController < ApplicationController
 
     if result.success?
       flash[:notice] = "Transaction was created successfully!"
-      redirect_to checkouts_path
+      redirect_to checkout_path(result.transaction.id)
     else
       flash[:error] = result.errors
       render 'new'
