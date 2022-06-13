@@ -16,7 +16,10 @@ class CheckoutsController < ApplicationController
 
 
   def index
-
+    # create some action that will be a result of all transactions within 90 days
+    @transactions = gateway.transaction.search do |search|
+      search.created_at >= Date.today - 90.days
+    end
   end
 
   def new

@@ -1,1 +1,25 @@
-<h1>Transaction listing page</h1>
+<h1>Transactions listing page</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Transaction ID</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+      <td><%= transaction.id %></td>
+      <td><%= transaction.amount %></td>
+      <td><%= transaction.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to 'Create a new transaction', new_checkout_path %>
+</p>
