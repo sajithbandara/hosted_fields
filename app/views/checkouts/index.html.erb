@@ -5,7 +5,9 @@
     <tr>
       <th>Transaction ID</th>
       <th>Amount</th>
+      <th>Type</th>
       <th>Status</th>
+      <th>Date</th>
     </tr>
   </thead>
 
@@ -14,11 +16,18 @@
       <tr>
       <td><%= transaction.id %></td>
       <td><%= transaction.amount %></td>
+      <td><%= transaction.type %></td>
       <td><%= transaction.status %></td>
+      <td><%= transaction.created_at %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<p>
+  <th>Total:</th>
+  <%= @total %>
+</p>
 
 <p>
   <%= link_to 'Create a new transaction', new_checkout_path %>
