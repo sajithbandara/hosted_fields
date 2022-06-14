@@ -43,23 +43,26 @@ class CheckoutsController < ApplicationController
         }
       }
     )
-    result = gateway.transaction.sale(
-      :amount => "10.00",
-      :payment_method_token => result.customer.payment_methods[0].token,
-      :options => {
-        :submit_for_settlement => true
-      }
-    )
-
     if result.success?
-      flash[:notice] = "Transaction was created successfully!"
-      redirect_to checkout_path(result.transaction.id)
+      result = gateway.transaction.sale(
+        :amount => "10.00", # make dynamic
+        :payment_method_token => result.customer.payment_methods[0].token,
+        :options => {
+          :submit_for_settlement => true
+        }
+      )
+
+      if result.success?
+        redirect_to checkout_path(result.transaction.id)
+      else
+        #flash[:error] = result.errors
+        #render 'new'
+        redirect_to new_checkout_path
+      end
     else
-      flash[:error] = result.errors
-      render 'new'
+      #flash[:notice] = error_messages
+      redirect_to new_checkout_path
     end
-    # create if else clause to determine if the above call worked, notify 
-    # the user of its success and redirect
   end
 
   TRANSACTION_SUCCESS_STATUSES = [

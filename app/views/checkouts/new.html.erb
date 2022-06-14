@@ -5,6 +5,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
+    <script src="https://js.braintreegateway.com/web/3.85.3/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.85.3/js/hosted-fields.min.js"></script>
   </head>
   <body>
     <%= form_tag("/checkouts", method: "post", id: "my-sample-form") do %>
@@ -21,9 +23,6 @@
       <input type="submit" value="Pay" disabled />
     <% end %>
 
-
-    <script src="https://js.braintreegateway.com/web/3.85.3/js/client.min.js"></script>
-    <script src="https://js.braintreegateway.com/web/3.85.3/js/hosted-fields.min.js"></script>
     <script>
       var form = document.querySelector('#my-sample-form');
       var submit = document.querySelector('input[type="submit"]');
