@@ -4,9 +4,9 @@ class CheckoutsController < ApplicationController
   def gateway
     gateway = Braintree::Gateway.new(
       :environment => :sandbox,
-      :merchant_id => "fs5wp6qdc238xcwf",
-      :public_key => "5gz8f2yhmcy3hj4r",
-      :private_key => "c07e7d8b020484b8739f2cd688604129",
+      :merchant_id => ENV['BT_MERCHANT_ID'],
+      :public_key => ENV['BT_PUBLIC_KEY'],
+      :private_key => ENV['BT_PRIVATE_KEY']
     )
   end
 
@@ -45,7 +45,7 @@ class CheckoutsController < ApplicationController
     )
     if result.success?
       result = gateway.transaction.sale(
-        :amount => "10.00", # make dynamic
+        :amount => "10.00",
         :payment_method_token => result.customer.payment_methods[0].token,
         :options => {
           :submit_for_settlement => true
@@ -56,11 +56,11 @@ class CheckoutsController < ApplicationController
         redirect_to checkout_path(result.transaction.id)
       else
         #flash[:error] = result.errors
-        #render 'new'
         redirect_to new_checkout_path
       end
     else
-      #flash[:notice] = error_messages
+      error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
+      flash[:error] = error_messages
       redirect_to new_checkout_path
     end
   end
