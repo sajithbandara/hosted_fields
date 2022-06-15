@@ -19,6 +19,13 @@
       <label for="expiration-date">Expiration Date</label>
       <div id="expiration-date"></div>
 
+      <label for="amount">
+        <span class="input-label">Amount</span>
+        <div class="input-wrapper amount-wrapper">
+          <input id="amount" name="amount" type="number" min="1" step="0.01" placeholder="Amount" value="10">
+        </div>
+      </label>
+
       <input type="hidden" id="nonce" name="payment_method_nonce" />
       <input type="submit" value="Pay" disabled />
     <% end %>

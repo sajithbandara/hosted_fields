@@ -45,7 +45,7 @@ class CheckoutsController < ApplicationController
     )
     if customer_result.success?
       transaction_result = gateway.transaction.sale(
-        :amount => "10.00", # make this dynamic
+        :amount => params["amount"], 
         :payment_method_token => customer_result.customer.payment_methods[0].token,
         :options => {
           :submit_for_settlement => true
@@ -54,10 +54,11 @@ class CheckoutsController < ApplicationController
 
       if transaction_result.success?
         #redirect_to checkout_path(transaction_result.transaction.id)
-        flash[:notice] = "Transaction was successful."
+        flash[:notice] = "Transaction was successful!"
         redirect_to new_checkout_path
       else
         #flash[:error] = result.errors
+        flash[:error] = "Your payment was unsuccessful. Please try again."
         redirect_to new_checkout_path
       end
     else
