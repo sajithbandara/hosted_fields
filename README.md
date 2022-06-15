@@ -1,24 +1,25 @@
-# README
+# Ruby on Rails – Hosted Fields
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup and Installation Instructions
 
-Things you may want to cover:
+Note: This project is run on Rails 7
 
-* Ruby version
+1. Install bundler
 
-* System dependencies
+```gem install bundler```
 
-* Configuration
+2. Run bundle to install dependencies
 
-* Database creation
+```bundle install``` 
 
-* Database initialization
+3. Using example.env, copy the contents into a local .env file where you will input your API credentials.
 
-* How to run the test suite
+4. Start the application
 
-* Services (job queues, cache servers, search engines, etc.)
+```rails s```
 
-* Deployment instructions
+5. Navigate to localhost:3000
 
-* ...
+6. To view a 3 month history page of your transactions, you can navigate to:
+
+```localhost:3000/checkouts```
