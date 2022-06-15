@@ -53,11 +53,9 @@ class CheckoutsController < ApplicationController
       )
 
       if transaction_result.success?
-        #redirect_to checkout_path(transaction_result.transaction.id)
         flash[:notice] = "Transaction was successful!"
         redirect_to new_checkout_path
       else
-        #flash[:error] = result.errors
         flash[:error] = "Your payment was unsuccessful. Please try again."
         redirect_to new_checkout_path
       end
