@@ -35,7 +35,7 @@ class CheckoutsController < ApplicationController
   def create
     @nonce = params["payment_method_nonce"]
 
-    result = gateway.customer.create(
+    customer_result = gateway.customer.create(
       :payment_method_nonce => @nonce,
       :credit_card => {
         :options => {
@@ -43,24 +43,25 @@ class CheckoutsController < ApplicationController
         }
       }
     )
-    if result.success?
-      result = gateway.transaction.sale(
-        :amount => "10.00",
-        :payment_method_token => result.customer.payment_methods[0].token,
+    if customer_result.success?
+      transaction_result = gateway.transaction.sale(
+        :amount => "10.00", # make this dynamic
+        :payment_method_token => customer_result.customer.payment_methods[0].token,
         :options => {
           :submit_for_settlement => true
         }
       )
 
-      if result.success?
-        redirect_to checkout_path(result.transaction.id)
+      if transaction_result.success?
+        #redirect_to checkout_path(transaction_result.transaction.id)
+        flash[:notice] = "Transaction was successful."
+        redirect_to new_checkout_path
       else
         #flash[:error] = result.errors
         redirect_to new_checkout_path
       end
     else
-      error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
-      flash[:error] = error_messages
+      flash[:error] = "Your payment method could not be vaulted. Use a different test card and try again."
       redirect_to new_checkout_path
     end
   end
