@@ -29,7 +29,7 @@ rails s
 Test amounts and values can be located at 
 https://developer.paypal.com/braintree/docs/reference/general/testing
 
-6. To view a 3 month history page of your transactions, you can navigate to:
+6. To view a 3 month history page of your transactions, you can click the **Transaction history page** link or navigate to:
 
 ```sh
 localhost:3000/checkouts
