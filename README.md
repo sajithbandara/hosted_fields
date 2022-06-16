@@ -31,3 +31,5 @@ rails s
 ```sh
 localhost:3000/checkouts
 ```
+
+Note: Please allow time for the search to run especially if you have a high number of sandbox transactions.

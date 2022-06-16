@@ -1,34 +1,61 @@
-<h1>Create a new transaction</h1>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
     <script src="https://js.braintreegateway.com/web/3.85.3/js/client.min.js"></script>
     <script src="https://js.braintreegateway.com/web/3.85.3/js/hosted-fields.min.js"></script>
   </head>
-  <body>
-    <%= form_tag("/checkouts", method: "post", id: "my-sample-form") do %>
-      <label for="card-number">Card Number</label>
-      <div id="card-number"></div>
+  <body class="bg-light">
+    <div class="container">
+      <div class="text-center">
+        <h2>Braintree Hosted Fields Checkout</h2>
+        <p class="lead">Enter your test card details below to create a new transaction</p>
+      </div>
 
-      <label for="cvv">CVV</label>
-      <div id="cvv"></div>
+      <%= form_tag("/checkouts", method: "post", id: "my-sample-form") do %>
 
-      <label for="expiration-date">Expiration Date</label>
-      <div id="expiration-date"></div>
-
-      <label for="amount">
-        <span class="input-label">Amount</span>
-        <div class="input-wrapper amount-wrapper">
-          <input id="amount" name="amount" type="number" min="1" step="0.01" placeholder="Amount" value="10">
+        <div class="col-md-6 mb-3">
+          <label for="card-number">Credit Card Number</label>
+          <div class="form-control" id="card-number"></div>
+          <div class="invalid-feedback">
+            Credit card number is required
+          </div>
         </div>
-      </label>
+        <div class="col-md-3 mb-3">
+          <label for="cvv">CVV</label>
+          <div class="form-control" id="cvv"></div>
+          <div class="invalid-feedback">
+            Security code required
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="expiration-date">Expiration Date</label>
+          <div class="form-control" id="expiration-date"></div>
+          <div class="invalid-feedback">
+            Expiration date required
+          </div>
+        </div>
 
-      <input type="hidden" id="nonce" name="payment_method_nonce" />
-      <input type="submit" value="Pay" disabled />
-    <% end %>
+        <div class="col-md-3 mb-3">
+        <label for="amount">Amount</span>
+          <div class="input-wrapper amount-wrapper">
+            <input id="amount" name="amount" type="number" min="1" step="0.01" placeholder="Amount" value="10">
+          </div>
+        </label>
+
+        <input type="hidden" id="nonce" name="payment_method_nonce" />
+
+        <hr class="my-4">
+        <input class="btn btn-primary btn-lg" type="submit" value="Pay">
+
+      <% end %>
+
+      <p class="my-3 lead">
+        <%= link_to 'Transaction history page', checkouts_path %>
+      </p>
+    </div>
 
     <script>
       var form = document.querySelector('#my-sample-form');
@@ -97,7 +124,3 @@
     </script>
   </body>
 </html>
-
-<p>
-<%= link_to 'Transaction history page', checkouts_path %>
-</p>
