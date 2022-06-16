@@ -26,10 +26,13 @@ rails s
 
 5. Navigate to ```localhost:3000```
 
+Test amounts and values can be located at 
+https://developer.paypal.com/braintree/docs/reference/general/testing
+
 6. To view a 3 month history page of your transactions, you can navigate to:
 
 ```sh
 localhost:3000/checkouts
 ```
 
-Note: Please allow time for the search to run especially if you have a high number of sandbox transactions.
+Note: Please allow time for the page to load especially if you have a large number of sandbox transactions.
